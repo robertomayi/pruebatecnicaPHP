@@ -54,25 +54,27 @@
     /***************************************/
 
     function postStore($body){
-
-     
-        $datos = store($body['nombre'],$body['apellido'],$body['email']); 
-                if ($datos === 0) {
-                    echo json_encode(
-                        array(
-                            "Status" => 204,
-                            "Contacto" => "No encontrado"
-                        )
-                    );
-                }else{
-                    echo json_encode(
-                        array(
-                            "Status" => 200,
-                            "Contacto" => "Contacto Insertado"
-                        )
-                    );
-                }
-            
+        $validar = validate($body);
+        if ($validar == []) {
+            $datos = store($body['nombre'],$body['apellido'],$body['email']); 
+            if ($datos === 0) {
+                echo json_encode(
+                    array(
+                        "Status" => 204,
+                        "Contacto" => "No logrado"
+                    )
+                ); 
+            }else{
+                echo json_encode(
+                    array(
+                        "Status" => 200,
+                        "Contacto" => "Contacto Insertado"
+                    )
+                );
+            }
+        }else {
+            echo json_encode($validar);
+        }
     }
 
     /***************************************/

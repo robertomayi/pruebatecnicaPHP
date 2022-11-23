@@ -14,21 +14,39 @@
     /***************************************/
     function getContactos(){
             $datos =  index(); 
-            echo json_encode(
-                array(
-                    "Status" => 200,
-                    "Contacto" => $datos
-                )
-            );
+            if ($datos === []) {
+                echo json_encode(
+                    array(
+                        "Status" => 204,
+                        "Contacto" => "No encontrado"
+                    )
+                );
+            }else{
+                echo json_encode(
+                    array(
+                        "Status" => 200,
+                        "Contacto" => $datos
+                    )
+                );
+            }
         }
     function getContactoId($id){
             $datos =  show($id); 
-            echo json_encode(
-            array(
-                "Status" => 200,
-                "Contacto" => $datos
-            )
-        );
+            if ($datos === []) {
+                echo json_encode(
+                    array(
+                        "Status" => 204,
+                        "Contacto" => "No encontrado"
+                    )
+                );
+            }else{
+                echo json_encode(
+                    array(
+                        "Status" => 200,
+                        "Contacto" => $datos
+                    )
+                );
+            }
     }
 
     /***************************************/
